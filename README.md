@@ -12,6 +12,9 @@ isolation:
 | Remediation | `remediation/retry_handler.py` | Shared retry helper used across the stack |
 | Monitoring | `monitoring/` | Prometheus exporter and anomaly detection logic |
 | Infrastructure as Code | `infrastructure/main.tf` | Terraform blueprint for Snowflake and Databricks resources |
+| Strategy & Vision | `docs/ai_cloudops_platform.md` | AI CloudOps platform blueprint for enterprise multi-cloud operations |
+| Working Prototype | `cloudops/run_demo.py` | Executable simulation of the CloudOps control plane with multi-cloud connectors |
+| CloudOps Walkthrough | `docs/cloudops_getting_started.md` | Step-by-step instructions for running and extending the prototype |
 
 ## Getting started
 
@@ -34,6 +37,10 @@ isolation:
    * `dags/etl_accelerator.py` shows how Airflow wires the components together.
    * `infrastructure/main.tf` illustrates how Snowflake and Databricks jobs
      would be provisioned.
+   * `cloudops/run_demo.py` demonstrates the CloudOps control plane concepts in
+     code with sample connectors and recommendations. See
+     `docs/cloudops_getting_started.md` for a full walkthrough of how to run the
+     simulation and validate it with automated tests.
 
 ## Monitoring demo
 
