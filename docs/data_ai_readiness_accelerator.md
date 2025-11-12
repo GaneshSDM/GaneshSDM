@@ -59,6 +59,37 @@ The Data & AI Readiness Accelerator helps organizations determine whether their 
 - Accelerator playbooks extend to Tableau, Power BI, Looker, and additional BI tools and data connection platforms that support SQL or semantic-layer integrations.
 - Flexible ingestion patterns support REST APIs, flat files, on-premises databases, and emerging data sources to future-proof AI readiness assessments.
 
+## Connecting to Core Analytics Platforms
+### Snowflake
+1. Configure a Snowflake warehouse and service user with the `USAGE` and `SELECT` privileges on the databases and schemas you plan to profile.
+2. Store Snowflake connection secrets (account, user, password/private key, role, warehouse, database, schema) in your secret manager or Streamlit `secrets.toml` file.
+3. Use the native Snowflake Python connector (`snowflake-connector-python`) or your preferred orchestration tool to execute profiling queries and materialize accelerator metrics.
+4. Register the connection in the accelerator’s configuration so downstream Tableau, Power BI, and Looker lineage jobs can trace Snowflake objects back to their AI readiness scores.
+
+### Databricks
+1. Generate a Databricks personal access token (PAT) scoped to the workspace hosting Delta Lake tables that feed AI workloads.
+2. Capture the workspace URL, cluster or SQL warehouse identifier, and PAT inside secure configuration storage.
+3. For notebook-driven pipelines, leverage the Databricks REST API or `databricks-sql-connector` to query Delta tables and collect quality statistics.
+4. When using Unity Catalog, enable lineage exports so the accelerator can map Delta Live Tables to Tableau, Power BI, and Looker semantic layers.
+
+### Looker (Looker Studio / LookML Models)
+1. Create a Looker API3 client ID and secret with read-only permissions to explore metadata, model files, and dashboards.
+2. Populate the accelerator configuration with the Looker host, port, API credentials, and target LookML repositories.
+3. Utilize the Looker SDK (`looker-sdk`) to enumerate explores, join paths, and field usage metrics that inform readiness scoring.
+4. Schedule accelerator sync jobs to align Looker model refresh cycles with Snowflake/Databricks data quality snapshots.
+
+### Power BI
+1. Register an Azure AD application with delegated permissions for the Power BI Service (Dataset.Read.All, Capacity.Read.All, Workspace.Read.All at minimum).
+2. Capture the tenant ID, client ID, and client secret/certificate in the accelerator secrets store.
+3. Authenticate via the `msal` library and call the Power BI REST APIs to extract dataset refresh history, lineage links, and workspace governance metadata.
+4. For on-premises data gateways, coordinate with gateway admins to retrieve source connection details and incorporate them into readiness profiling.
+
+### Tableau
+1. Provision a Tableau Server or Tableau Cloud service account with Explorer or higher permissions for the relevant sites and projects.
+2. Store Tableau credentials or personal access tokens securely; include the server URL, site ID, and token name/secret in configuration.
+3. Use the Tableau REST API or Metadata API (GraphQL) via the `tableauserverclient` package to inventory workbooks, data sources, and refresh schedules.
+4. Enable Tableau Bridge or direct connections so accelerator profiling can trace workbook dependencies back to Snowflake, Databricks, and other upstream systems.
+
 ## Next Steps if Adopted
 1. Secure executive sponsorship and data access approvals.
 2. Schedule discovery sessions with data owners and analytics leads.
