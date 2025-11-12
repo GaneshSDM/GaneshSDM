@@ -17,6 +17,8 @@ class PlatformReadiness:
     governance_coverage: int
     ai_readiness: int
     notes: List[str]
+    feature_adoption: Dict[str, bool]
+    observability_checks: Dict[str, str]
 
     def to_metric_frame(self) -> pd.DataFrame:
         return pd.DataFrame(
@@ -49,6 +51,19 @@ PLATFORM_PROFILES: Dict[str, PlatformReadiness] = {
             "Incremental data refresh patterns deliver sub-hour freshness for AI workloads.",
             "Need to expand stewardship assignments for long-tail schemas.",
         ],
+        feature_adoption={
+            "Automated Freshness Monitoring": True,
+            "Schema Drift Protection": True,
+            "PII Guardrails": True,
+            "Lineage Explorer": True,
+            "Bias & Fairness Screening": False,
+        },
+        observability_checks={
+            "Freshness Lag (hrs)": "0.4",
+            "Schema Drift Alerts (30d)": "0",
+            "Critical Data Quality Tests": "58/60",
+            "Open Remediation Items": "2",
+        },
     ),
     "Databricks": PlatformReadiness(
         name="Databricks",
@@ -61,6 +76,19 @@ PLATFORM_PROFILES: Dict[str, PlatformReadiness] = {
             "Delta Live Tables deliver strong observability but alert runbooks require updates.",
             "Opportunity to standardize data quality checks for partner-contributed notebooks.",
         ],
+        feature_adoption={
+            "Automated Freshness Monitoring": True,
+            "Schema Drift Protection": True,
+            "PII Guardrails": False,
+            "Lineage Explorer": True,
+            "Bias & Fairness Screening": True,
+        },
+        observability_checks={
+            "Freshness Lag (hrs)": "1.2",
+            "Schema Drift Alerts (30d)": "3",
+            "Critical Data Quality Tests": "46/55",
+            "Open Remediation Items": "5",
+        },
     ),
     "Looker": PlatformReadiness(
         name="Looker",
@@ -73,6 +101,19 @@ PLATFORM_PROFILES: Dict[str, PlatformReadiness] = {
             "Visual regression testing needed to protect mission-critical dashboards.",
             "Adopt deployment review board to reduce ad-hoc production changes.",
         ],
+        feature_adoption={
+            "Automated Freshness Monitoring": False,
+            "Schema Drift Protection": True,
+            "PII Guardrails": True,
+            "Lineage Explorer": True,
+            "Bias & Fairness Screening": False,
+        },
+        observability_checks={
+            "Freshness Lag (hrs)": "3.5",
+            "Schema Drift Alerts (30d)": "4",
+            "Critical Data Quality Tests": "38/50",
+            "Open Remediation Items": "7",
+        },
     ),
     "Power BI": PlatformReadiness(
         name="Power BI",
@@ -85,6 +126,19 @@ PLATFORM_PROFILES: Dict[str, PlatformReadiness] = {
             "Fabric workspaces ready for automated lineage once premium capacity is activated.",
             "Improve certified dataset adoption to reduce redundant semantic models.",
         ],
+        feature_adoption={
+            "Automated Freshness Monitoring": True,
+            "Schema Drift Protection": False,
+            "PII Guardrails": True,
+            "Lineage Explorer": False,
+            "Bias & Fairness Screening": True,
+        },
+        observability_checks={
+            "Freshness Lag (hrs)": "5.0",
+            "Schema Drift Alerts (30d)": "6",
+            "Critical Data Quality Tests": "29/45",
+            "Open Remediation Items": "11",
+        },
     ),
     "Tableau": PlatformReadiness(
         name="Tableau",
@@ -97,8 +151,94 @@ PLATFORM_PROFILES: Dict[str, PlatformReadiness] = {
             "Adopt Data Management add-on to scale cataloging and data discovery.",
             "Embed quality flags within dashboards to surface readiness gaps to analysts.",
         ],
+        feature_adoption={
+            "Automated Freshness Monitoring": True,
+            "Schema Drift Protection": False,
+            "PII Guardrails": True,
+            "Lineage Explorer": True,
+            "Bias & Fairness Screening": False,
+        },
+        observability_checks={
+            "Freshness Lag (hrs)": "2.1",
+            "Schema Drift Alerts (30d)": "2",
+            "Critical Data Quality Tests": "41/52",
+            "Open Remediation Items": "6",
+        },
     ),
 }
+
+TEN_STEP_PLAN = [
+    {
+        "Step": "1. Executive Alignment",
+        "Outcome": "Sponsor-approved success metrics and scope",
+        "Owner": "Data Strategy",
+        "Status": "Complete",
+        "Target": "Week 1",
+    },
+    {
+        "Step": "2. Data Inventory",
+        "Outcome": "Catalogued Snowflake/Databricks sources and BI assets",
+        "Owner": "Data Governance",
+        "Status": "Complete",
+        "Target": "Week 1",
+    },
+    {
+        "Step": "3. Connectivity Validation",
+        "Outcome": "Credential and network checks across all platforms",
+        "Owner": "Platform Engineering",
+        "Status": "In Progress",
+        "Target": "Week 2",
+    },
+    {
+        "Step": "4. Profiling Automation",
+        "Outcome": "Freshness and anomaly jobs running on schedule",
+        "Owner": "Data Engineering",
+        "Status": "In Progress",
+        "Target": "Week 3",
+    },
+    {
+        "Step": "5. Pipeline Observability",
+        "Outcome": "SLA breaches and incidents triaged with owners",
+        "Owner": "Analytics Ops",
+        "Status": "Planned",
+        "Target": "Week 4",
+    },
+    {
+        "Step": "6. Semantic Diagnostics",
+        "Outcome": "BI semantic layer checks executed and scored",
+        "Owner": "BI Center of Excellence",
+        "Status": "Planned",
+        "Target": "Week 5",
+    },
+    {
+        "Step": "7. Governance Review",
+        "Outcome": "Controls mapped to regulatory requirements",
+        "Owner": "Risk & Compliance",
+        "Status": "Planned",
+        "Target": "Week 6",
+    },
+    {
+        "Step": "8. Remediation Sprinting",
+        "Outcome": "Backlog prioritized with committed owners",
+        "Owner": "Data PMO",
+        "Status": "Planned",
+        "Target": "Week 7",
+    },
+    {
+        "Step": "9. AI Feature Enablement",
+        "Outcome": "Ready datasets mapped to AI features and models",
+        "Owner": "ML Engineering",
+        "Status": "Planned",
+        "Target": "Week 8",
+    },
+    {
+        "Step": "10. Continuous Monitoring",
+        "Outcome": "Runbook for recurring score refresh approved",
+        "Owner": "Data Stewardship",
+        "Status": "Planned",
+        "Target": "Week 9",
+    },
+]
 
 
 def render_sidebar() -> PlatformReadiness:
@@ -169,6 +309,58 @@ def render_quality_gap_analysis() -> None:
     st.dataframe(comparison_frame.style.background_gradient(axis=0, cmap="Blues"))
 
 
+def render_feature_matrix() -> None:
+    st.subheader("Platform Feature Coverage")
+    st.write(
+        "Compare accelerator feature adoption across data platforms to identify where additional enablement or tooling is required."
+    )
+    features = sorted(
+        {feature for profile in PLATFORM_PROFILES.values() for feature in profile.feature_adoption}
+    )
+    matrix_rows = []
+    for feature in features:
+        row = {"Feature": feature}
+        for name, profile in PLATFORM_PROFILES.items():
+            row[name] = "✅" if profile.feature_adoption.get(feature, False) else "⚠️"
+        matrix_rows.append(row)
+
+    feature_frame = pd.DataFrame(matrix_rows).set_index("Feature")
+    st.dataframe(feature_frame)
+
+
+def render_check_catalog(selected: PlatformReadiness) -> None:
+    st.subheader("Key Checks & Thresholds")
+    st.write(
+        "Detailed telemetry summarizing the latest readiness checks for the selected platform. Values represent the most recent accelerator run."
+    )
+    check_frame = pd.DataFrame(
+        {
+            "Check": list(selected.observability_checks.keys()),
+            "Latest Result": list(selected.observability_checks.values()),
+        }
+    )
+    st.table(check_frame)
+
+
+def render_ten_step_plan() -> None:
+    st.subheader("Ten-Step Readiness Plan Tracker")
+    st.write(
+        "Monitor delivery status across the accelerator's ten-step methodology, aligning directly with the implementation approach described in the guide."
+    )
+    plan_frame = pd.DataFrame(TEN_STEP_PLAN)
+
+    status_colors = {
+        "Complete": "background-color: #2ca02c; color: white;",
+        "In Progress": "background-color: #ff7f0e; color: white;",
+        "Planned": "background-color: #1f77b4; color: white;",
+    }
+
+    def style_status(value: str) -> str:
+        return status_colors.get(value, "")
+
+    st.dataframe(plan_frame.style.applymap(style_status, subset=["Status"]))
+
+
 def render_action_plan(selected: PlatformReadiness) -> None:
     st.subheader("90-Day Action Plan")
     plan_items = {
@@ -192,6 +384,9 @@ def main() -> None:
     render_overview(selected_platform)
     render_charts(selected_platform)
     render_quality_gap_analysis()
+    render_feature_matrix()
+    render_check_catalog(selected_platform)
+    render_ten_step_plan()
     render_action_plan(selected_platform)
 
 
