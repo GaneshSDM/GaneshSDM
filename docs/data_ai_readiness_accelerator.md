@@ -1,154 +1,401 @@
-# Data & AI Readiness Accelerator
+# Decision Minds — AI Readiness Assessment Accelerator
 
-## Purpose
-The Data & AI Readiness Accelerator helps organizations determine whether their existing data landscape is prepared to support upcoming AI workloads. The accelerator assesses the maturity of data sources, integration practices, and analytics tooling to provide a readiness score and a prioritized roadmap for remediation.
+**Version:** v1.0  \\
+**Audience:** Product, Engineering, Design, Data, Partner Alliances, Sales, Executive Sponsors  \\
+**Scope:** MVP for mid to large enterprises with Snowflake, Databricks, or BigQuery as primary data platforms, plus common SaaS systems (Salesforce, ServiceNow, PagerDuty), and modern ETL tooling (dbt, Fivetran, Matillion)
 
-## Key Themes
-- **Garbage in, garbage out:** AI outcomes depend on trustworthy, high-quality data. The accelerator emphasizes profiling and cleansing activities to reduce noise before model development.
-- **Business intelligence as a lens:** Tableau, Power BI, and Looker models provide a rich view into how the organization currently consumes data. Their structure and usage patterns offer critical clues about downstream AI readiness across every analytics platform.
-- **Data quality as the foundation:** Automated and manual checks focus on timeliness, completeness, consistency, and lineage so that AI teams inherit reliable datasets.
+---
 
-## Accelerator Workflow
-1. **Discovery & Context**
-   - Identify strategic AI initiatives and expected workloads.
-   - Catalog critical data domains, owners, and integration points.
-   - Review existing governance artifacts, including data dictionaries and catalog entries.
-2. **Model & Pipeline Assessment**
-   - Inspect Tableau, Power BI, and Looker semantic models, calculated fields, and refresh cadence.
-   - Trace source systems feeding reporting models (e.g., Snowflake, Databricks, other cloud data warehouses) to evaluate schema stability and data freshness.
-   - Evaluate existing ETL/ELT pipelines for observability coverage (logging, alerting, SLAs).
-3. **Profiling & Quality Scoring**
-   - Run automated data profiling to surface anomalies (null rates, duplicates, drift).
-   - Measure data quality dimensions against defined KPIs (accuracy, completeness, conformity, integrity, timeliness).
-   - Summarize findings in a readiness dashboard with actionable insights.
-4. **Cleansing & Remediation Plan**
-   - Prioritize remediation tasks based on business impact and implementation effort.
-   - Recommend tooling or process changes for data cleansing (e.g., validation rules, deduplication strategies, stewardship workflows).
-   - Define checkpoints to monitor improvements and prevent regression.
-5. **Readiness Scoring & Roadmap**
-   - Compute an overall readiness score with weighted metrics covering data, process, and governance.
-   - Deliver an executive-ready report summarizing current posture, remediation roadmap, and investment guidance.
+## 1. Product Concept and Objectives
 
-## Ten-Step Implementation Approach
-1. **Executive Alignment & Value Framing**
-   - Define the business outcomes each AI initiative must unlock and how readiness metrics will be consumed by sponsors.
-   - Establish success criteria, reporting cadence, and escalation paths for risks uncovered during the assessment.
-2. **Enterprise Data Inventory & Prioritization**
-   - Compile a consolidated inventory of Snowflake databases, Databricks catalogs, and connected BI semantic models.
-   - Classify assets by criticality, data domain, sensitivity, and downstream AI consumer to focus remediation on the most impactful datasets.
-3. **Connectivity & Access Validation**
-   - Confirm service accounts, network routes, and secret storage are configured for Snowflake, Databricks, Looker, Power BI, Tableau, and adjacent data connection platforms.
-   - Execute smoke tests that validate authentication flows, query execution, and metadata harvesting across each source.
-4. **Profiling Automation Setup**
-   - Deploy automated profiling jobs that collect freshness, completeness, schema drift, and anomaly metrics at the table, dashboard, and AI feature level.
-   - Parameterize frequency and thresholds so the same playbook can scale to new data products without manual intervention.
-5. **Pipeline Observability & Incident Review**
-   - Integrate pipeline metadata (Airflow, dbt, Delta Live Tables, etc.) to expose SLA breaches, failed jobs, and alert coverage.
-   - Conduct a post-incident review to catalogue recurring failure modes and align them with remediation backlog items.
-6. **Semantic Model Deep Dive**
-   - Analyze LookML explores, Power BI datasets, and Tableau data sources for calculation accuracy, join cardinality, and refresh dependencies.
-   - Flag BI elements that break AI readiness principles (e.g., manual extracts, unmanaged local files, or non-certified datasets).
-7. **Governance & Compliance Assessment**
-   - Evaluate ownership assignments, data classification tags, PII handling procedures, and approval workflows in catalog and BI governance layers.
-   - Document regulatory obligations (GDPR, HIPAA, financial reporting) and map controls to readiness scoring.
-8. **Remediation Sprint Planning**
-   - Sequence cleansing, lineage enrichment, schema hardening, and access remediation tasks into 2–3 sprint waves with clear acceptance criteria.
-   - Identify cross-team dependencies (security, platform engineering, analytics) and align capacity to sustain remediation momentum.
-9. **AI Feature & Model Enablement**
-   - Validate that curated datasets meet the statistical stability and latency requirements for downstream model training and inference.
-   - Capture feature documentation, drift monitoring strategies, and retraining triggers that will consume cleansed data.
-10. **Continuous Monitoring & Feedback Loop**
-    - Configure dashboards, alerts, and service-level objectives that keep readiness metrics evergreen.
-    - Host monthly operating reviews to adapt scoring weights, recalibrate remediation priorities, and showcase value delivered.
+### Problem
+Enterprises want AI outcomes but lack clarity on data readiness. Poor data quality, unclear lineage, weak governance, and fragmented tooling lead to unreliable AI initiatives.
 
-## Extended Features and Checks
-- **Automated Freshness Validation:** Hourly freshness probes for priority Snowflake and Databricks tables with alert thresholds tied to AI retraining windows.
-- **Schema Drift Monitoring:** Version-controlled snapshots of schemas and semantic layer definitions to detect breaking changes before models fail.
-- **PII & Security Guardrails:** Integration with data classification services to confirm sensitive fields remain masked in BI tools and downstream feature stores.
-- **Observability Coverage Scoring:** Weighted scoring of logging, tracing, and alerting coverage across ingestion, transformation, and serving layers.
-- **Bias & Fairness Screen:** Optional statistical checks that surface representation gaps within training datasets prior to AI deployment.
-- **Self-Service Lineage Explorer:** Interactive lineage visualizations that stitch together Snowflake objects, dbt nodes, and Tableau/Power BI/Looker assets.
-- **Remediation Backlog Analytics:** Burn-up charts that quantify throughput, age, and impact of outstanding data quality tasks.
-- **Readiness Scenario Modeling:** Sensitivity analysis that demonstrates how improving a single metric (e.g., governance coverage) influences the composite AI Readiness Score.
-- **Platform Health Scorecards:** Standardized reports for Snowflake, Databricks, Looker, Power BI, Tableau, and other connectors summarizing SLA adherence and incident trends.
-- **Adoption & Enablement Tracking:** Insight into steward training completion, certified dataset adoption, and BI feature usage to verify operational uptake.
+### Vision
+Provide a fast, opinionated, and explainable assessment that connects to existing data stacks, evaluates readiness across critical dimensions, scores the organization, and prescribes a prioritized, vendor-aware roadmap. The goal is to de-risk early AI investments and direct effort toward high ROI improvements and quick wins.
 
-## Metrics & KPIs
-- **Data Quality Index (DQI):** Composite score aggregating accuracy, completeness, and timeliness metrics.
-- **Model Trustworthiness:** Percentage of critical Tableau/Power BI dashboards backed by certified datasets.
-- **Pipeline Reliability:** Success rate and mean time to recovery (MTTR) for production data pipelines.
-- **Governance Coverage:** Portion of priority datasets with documented owners, lineage, and access controls.
-- **AI Readiness Score:** Weighted rating (0-100) that captures data quality, operational maturity, and governance alignment.
+### Goals
+- Rapid, read-only assessment across data quality, lineage, governance, security, privacy, access, platform reliability, cost hygiene, and AI safety guardrails.
+- Clear scoring with transparent logic, drill-downs, and executive-ready summaries per role.
+- Actionable recommendations mapped to the customer’s cloud and license posture.
+- Exportable deliverables: PDF executive report, backlog in CSV, Jira or Azure Boards import, and architecture-ready epics.
 
-## Professional Services Offering
-- **Readiness Assessment Sprint (2-4 weeks):** Rapid evaluation leveraging the accelerator toolkit to score current-state readiness.
-- **Remediation Implementation:** Hands-on support to execute cleansing, pipeline hardening, and governance enhancements.
-- **Change Management & Enablement:** Workshops for data stewards and analytics teams to maintain AI-ready data practices.
-- **Ongoing Health Monitoring:** Optional managed service to track KPIs, refresh readiness scores, and surface emerging risks.
+### Non-Goals (MVP)
+- Not a full data catalog or governance suite.
+- Not a data transformation tool.
+- Not a production DQ monitor. The MVP focuses on point-in-time assessment, with optional continuous mode in Post-MVP.
 
-## Deliverables
-- Executive summary highlighting AI readiness posture and key risks.
-- Detailed findings report with data quality metrics, dashboard model review, and remediation backlog.
-- Tableau/Power BI/Looker model lineage diagrams and dependency mapping.
-- Prioritized roadmap with effort estimates, sequencing, and success criteria.
+### Target Users and Personas
+- **CFO:** Wants ROI justification, cost control, and risk visibility.
+- **CRO:** Needs data reliability for risk models and compliance alignment.
+- **CIO/CTO:** Platform readiness, security posture, modernization gaps, vendor leverage.
+- **Chief Data and Analytics Officer (CDAO):** Maturity, quality, lineage, governance, people and process gaps.
+- **Chief AI Officer / Head of AI:** Where AI can work today, what to fix first, and safe model choices.
+- **Data Platform Leads:** Concrete fixes, backlog items, and success metrics tied to their stack.
 
-## Benefits
-- Accelerated path to launching AI workloads with confidence in data reliability.
-- Clear visibility into BI model dependencies and potential technical debt.
-- Quantifiable metrics that help align stakeholders on investment priorities.
-- Sustainable data quality practices that reduce rework and improve analytics outcomes.
+### Value Proposition
+- Immediate insight into “AI-ready today vs fix first.”
+- Transparent scoring with evidence and reproducible logic.
+- Practical roadmap aligned to existing cloud contracts and licenses.
+- Accelerated time to first AI wins without wasting budget.
 
-## Platform Coverage
-- Native connectivity to Snowflake, Databricks, and other leading cloud data platforms ensures profiling and quality scoring run against production-grade datasets.
-- Accelerator playbooks extend to Tableau, Power BI, Looker, and additional BI tools and data connection platforms that support SQL or semantic-layer integrations.
-- Flexible ingestion patterns support REST APIs, flat files, on-premises databases, and emerging data sources to future-proof AI readiness assessments.
+---
 
-## Connecting to Core Analytics Platforms
-### Snowflake
-1. Configure a Snowflake warehouse and service user with the `USAGE` and `SELECT` privileges on the databases and schemas you plan to profile.
-2. Store Snowflake connection secrets (account, user, password/private key, role, warehouse, database, schema) in your secret manager or Streamlit `secrets.toml` file.
-3. Use the native Snowflake Python connector (`snowflake-connector-python`) or your preferred orchestration tool to execute profiling queries and materialize accelerator metrics.
-4. Register the connection in the accelerator’s configuration so downstream Tableau, Power BI, and Looker lineage jobs can trace Snowflake objects back to their AI readiness scores.
-5. Optional: Enable Snowflake Object Tagging and Access History to enrich governance lineage, sensitivity classifications, and anomaly detection within the accelerator.
+## 2. Scope and Feature Set (MVP)
 
-### Databricks
-1. Generate a Databricks personal access token (PAT) scoped to the workspace hosting Delta Lake tables that feed AI workloads.
-2. Capture the workspace URL, cluster or SQL warehouse identifier, and PAT inside secure configuration storage.
-3. For notebook-driven pipelines, leverage the Databricks REST API or `databricks-sql-connector` to query Delta tables and collect quality statistics.
-4. When using Unity Catalog, enable lineage exports so the accelerator can map Delta Live Tables to Tableau, Power BI, and Looker semantic layers.
-5. Configure Delta Expectations or Great Expectations suites to enforce validation rules before curated tables are consumed by AI workloads.
+### 2.1 Connectors and Discovery
+- **Data Platforms:** Snowflake, Databricks, BigQuery.
+- **Pipelines:** dbt, Fivetran, Matillion.
+- **SaaS Systems:** Salesforce, ServiceNow, PagerDuty.
+- **Security and IAM Signals:** Cloud IAM snapshots, SSO groups, service principals.
+- **Metadata Sources:** Native INFORMATION_SCHEMA, Unity Catalog, BigQuery INFORMATION_SCHEMA, dbt manifest, Fivetran and Matillion APIs.
+- **Access Model:** Read-only OAuth or service account with least privilege. Sampling strategy configurable per source. PII discovery optional but encouraged.
 
-### Looker (Looker Studio / LookML Models)
-1. Create a Looker API3 client ID and secret with read-only permissions to explore metadata, model files, and dashboards.
-2. Populate the accelerator configuration with the Looker host, port, API credentials, and target LookML repositories.
-3. Utilize the Looker SDK (`looker-sdk`) to enumerate explores, join paths, and field usage metrics that inform readiness scoring.
-4. Schedule accelerator sync jobs to align Looker model refresh cycles with Snowflake/Databricks data quality snapshots.
-5. Capture LookML Git repository references and deploy webhook triggers to surface unreviewed changes or validation failures that could impact AI KPIs.
+### 2.2 Maturity Dimensions and Scoring
+Each dimension scored on a 0 to 5 scale. Default weightings can be tuned per customer. Scoring is evidence-backed with drill-down.
+1. Data Quality: completeness, accuracy, consistency, timeliness, uniqueness, validity.
+2. Lineage and Observability: coverage of upstream and downstream, freshness SLAs, incident MTTR.
+3. Governance and Access: policies, role-based access, least privilege, approvals, auditability.
+4. Privacy and Security: PII detection, masking strategies, key management, secrets hygiene.
+5. Metadata and Documentation: table and column docs, business glossary links, ownership.
+6. Platform Reliability and FinOps: cost allocation, auto-suspend, query queuing, warehouse sizing, job success rate.
+7. Model Governance Readiness: prompt logging readiness, feature store hygiene, dataset versioning, evaluation frameworks.
+8. People and Process: RACI clarity, change management, SDLC for data and AI, incident runbooks.
 
-### Power BI
-1. Register an Azure AD application with delegated permissions for the Power BI Service (Dataset.Read.All, Capacity.Read.All, Workspace.Read.All at minimum).
-2. Capture the tenant ID, client ID, and client secret/certificate in the accelerator secrets store.
-3. Authenticate via the `msal` library and call the Power BI REST APIs to extract dataset refresh history, lineage links, and workspace governance metadata.
-4. For on-premises data gateways, coordinate with gateway admins to retrieve source connection details and incorporate them into readiness profiling.
-5. Enable Fabric Monitoring or Azure Log Analytics connectors to unify refresh failures, gateway latency, and capacity utilization metrics within the accelerator.
+**Example Maturity Bands**
+- 0 to 1: Ad hoc and opaque.
+- 2: Partially defined with gaps.
+- 3: Defined, measured, but inconsistent.
+- 4: Managed and automated in key areas.
+- 5: Optimized, automated, auditable, and cost-efficient.
 
-### Tableau
-1. Provision a Tableau Server or Tableau Cloud service account with Explorer or higher permissions for the relevant sites and projects.
-2. Store Tableau credentials or personal access tokens securely; include the server URL, site ID, and token name/secret in configuration.
-3. Use the Tableau REST API or Metadata API (GraphQL) via the `tableauserverclient` package to inventory workbooks, data sources, and refresh schedules.
-4. Enable Tableau Bridge or direct connections so accelerator profiling can trace workbook dependencies back to Snowflake, Databricks, and other upstream systems.
-5. Activate Data Quality Warnings and virtual connections to publish readiness flags directly into business-critical workbooks and data catalogs.
+### 2.3 KPIs and Metrics Library
+- **Quality:** % columns with tests, failed test rate, null rate, freshness lag, duplicate key rate, schema drift frequency.
+- **Lineage:** % assets with upstream lineage, % jobs with success SLO, average data freshness, number of undocumented critical tables.
+- **Governance:** % PII columns masked, % tables with owners, % users with least privilege, number of dormant service accounts.
+- **Security:** Credential rotation age, keys without rotation policy, public network access flags, cross-account access audit.
+- **FinOps:** Spend by domain, % compute idle time, right-sizing opportunities, failed query cost, top N costly transformations.
+- **AI Readiness:** % datasets with quality gates, % datasets versioned, presence of eval datasets, prompt and output logging readiness.
 
-## Next Steps if Adopted
-1. Secure executive sponsorship and data access approvals.
-2. Schedule discovery sessions with data owners and analytics leads.
-3. Provision environments for profiling, quality scoring, and dashboard analysis.
-4. Launch the assessment sprint and socialize preliminary findings.
-5. Iterate on remediation plan with cross-functional stakeholders.
+### 2.4 Evidence and Explainability
+- For each score, show sampled evidence, test results, and how each metric rolls up.
+- Provide “Why this matters” and “How to fix” inline, with backlog items and effort estimates.
+
+### 2.5 Recommendations and Roadmap
+- Vendor-aware advice: if Azure tenant, map first steps to Microsoft Copilot and Fabric connectors. If GCP tenant, map to Vertex AI and Gemini. If OpenAI contracts exist, map to an OpenAI plan with guardrails.
+- Air-gapped or regulated options recommended when policies require offline or private endpoints.
+- Produce a 30, 60, 90 day plan and a 6 month modernization track with epics and stories.
+
+### 2.6 Deliverables
+- Executive PDF deck, role-based scorecards, backlog CSV, Jira or Azure Boards import, and a signed architecture proposal for two quick-win pilots.
+
+---
+
+## 3. Out of Scope (MVP)
+- Automated remediation. Provide guidance and generated backlogs only.
+- Real-time monitoring at scale. Offer as Post-MVP “Continuous Mode.”
+- Proprietary catalog replacement.
+
+---
+
+## 4. Success Metrics and Acceptance Criteria
+- Assessment completes within 1 to 2 business days for up to 10 data domains and 1 to 3 platforms.
+- Scores and evidence reproducible by rerun with identical config.
+- Executive deck generated with role-specific summaries.
+- At least two quick-win pilots identified with clear acceptance tests.
+
+---
+
+## 5. Product Requirements in Detail
+
+### 5.1 Connector Requirements
+- **Snowflake:** Read-only role with ACCOUNT_USAGE and database read on selected schemas.
+- **Databricks:** Unity Catalog read metadata, job and cluster logs, audit logs where available.
+- **BigQuery:** INFORMATION_SCHEMA and Data Catalog metadata access.
+- **dbt:** Parse `manifest.json` and run results for tests and exposures.
+- **Fivetran and Matillion:** Job status, failure rates, schedules, API metadata.
+- **SaaS:** Salesforce object counts, field metadata, data quality sampling, API limits and delays; ServiceNow CMDB completeness; PagerDuty incident metrics.
+
+### 5.2 Scoring Logic Examples
+Each metric computes a subscore 0 to 100. Dimension score is a weighted average, mapped to 0 to 5.
+- Completeness subscore = 100 minus `min(100, null_rate_percent × weight_nulls)` with special handling for core keys.
+- Freshness subscore = percentile rank of hours_since_last_load against SLA plus schedule adherence.
+- Lineage coverage subscore = `assets_with_lineage ÷ total_critical_assets × 100`, adjusted by job success SLO.
+- Governance subscore = average of ownership coverage, mask coverage on PII, least privilege alignment, audit log availability.
+- FinOps subscore = blend of idle compute percent, right-sizing opportunities found, failed query cost percent.
+- AI Readiness subscore = percent of datasets with tests and versioning, presence of eval datasets, prompt logging readiness.
+
+**Mapping to maturity level**
+- 0 to 40 maps to 1
+- 41 to 55 maps to 2
+- 56 to 70 maps to 3
+- 71 to 85 maps to 4
+- 86 to 100 maps to 5
+
+### 5.3 Evidence Model
+- Each metric stores query text or API call references, sample counts, timestamps, and redacted examples.
+- Evidence is exportable to PDF and JSON.
+- All queries run with sampling limits to control cost.
+
+### 5.4 Role-Based Views
+- **CFO:** Cost waste, right-size opportunities, spend by domain, risk of compliance penalties.
+- **CRO:** Lineage completeness on risk datasets, model explainability posture, controls and audit logs.
+- **CIO/CTO:** Platform posture, modernization gaps, IAM hygiene, vendor leverage.
+- **CDAO:** DQ test coverage, glossary, ownership, prioritized data domains.
+- **CAIO:** AI-ready datasets, evaluation readiness, safe model options by data sensitivity.
+
+### 5.5 Export and Integration
+- PDF, CSV, Jira or Azure Boards import files.
+- Optional Slack or Teams summary.
+
+---
+
+## 6. High-Level Architecture
+
+### 6.1 Component Overview
+1. Connector Layer: Pluggable, read-only, least privilege.
+2. Metadata Harvester: Pulls schemas, stats, lineage, run history, users and roles.
+3. Profiler and Sampler: Column profiling, freshness checks, key uniqueness tests, schema drift detection.
+4. Policy and PII Detector: Regex and ML matchers, classification, policy cross-checks.
+5. Scoring Engine: Computes subscores, aggregates by dimension, applies weightings and thresholds.
+6. Recommendation Engine: Maps gaps to fixes, estimates effort, aligns to vendor stack and licenses.
+7. Report Generator: Builds PDFs, role scorecards, CSV backlogs.
+8. Dashboard Service: Interactive browser UI with drill-downs and evidence.
+9. Security and Secrets: KMS integration, vault for credentials, audit logging.
+10. Orchestrator: Runs assessments, schedules reruns, tracks state.
+
+### 6.2 Data Flow
+- Ingest metadata and samples through connectors.
+- Store in a read-only staging store.
+- Run profilers and policies.
+- Compute scores.
+- Materialize views for UI and export.
+- Generate reports and backlog.
+
+### 6.3 Deployment Topologies
+- **Cloud SaaS:** Decision Minds hosted with tenant isolation.
+- **Private VPC:** Deployed in customer cloud using containers and Terraform.
+- **Air-gapped:** Offline mode with limited connectors and secure artifact transfer.
+
+### 6.4 Security and Compliance
+- No raw sensitive data leaves customer boundary.
+- Sampling by default excludes sensitive columns unless customer opts in with masking.
+- Full audit log of every query and API call.
+- Encryption in transit and at rest.
+
+---
+
+## 7. UI and UX Wireframes
+
+### 7.1 Pages
+1. **Welcome and Connection Setup**
+   - Tiles for Snowflake, Databricks, BigQuery, dbt, Fivetran, Matillion, Salesforce, ServiceNow, PagerDuty.
+   - Minimal config and permissions test.
+2. **Assessment Run Configuration**
+   - Pick data domains, sampling policy, PII detection level, SLA targets.
+3. **Run Progress**
+   - Status, estimated remaining time, cost estimate.
+4. **Results Overview**
+   - Overall readiness gauge, dimension scores, top 5 risks, top 5 quick wins.
+5. **Dimension Drill-down**
+   - Metric cards with scores, evidence, and “why it matters.”
+6. **Recommendations and Roadmap**
+   - 30, 60, 90 day plan, 6 month track, effort vs impact matrix, vendor-aware options.
+7. **Role-Based Summaries**
+   - CFO, CRO, CIO, CDAO, CAIO, CTO tabs with tailored narratives.
+8. **Exports**
+   - PDF, CSV, Jira, Azure Boards.
+
+### 7.2 Low-Fidelity Wireframe Sketches (ASCII)
+```
+Results Overview
++---------------------------------------------------------------+
+| AI Readiness: 3.2 of 5    Trend: N/A (first run)             |
+| [Data Quality 2.9] [Lineage 2.4] [Governance 3.1] [Security 3.6]
+| [FinOps 3.0] [AI Governance 2.7] [Metadata 3.2] [People 2.8]  |
++---------------------------------------------------------------+
+| Top Risks                                                     |
+| 1) 24 percent of critical tables lack owners                  |
+| 2) 31 percent PII unmasked in sandbox schemas                 |
+| 3) Freshness SLA misses in 3 domains                          |
+| 4) Idle compute waste approx 14 percent                        |
+| 5) No eval datasets for 2 proposed AI use cases               |
++---------------------------------------------------------------+
+| Quick Wins                                                    |
+| A) Enforce ownership policy on top 50 tables                  |
+| B) Add dbt tests for key uniqueness in 12 models              |
+| C) Right-size Snowflake warehouses after business hours       |
+| D) Turn on prompt logging in staging environment              |
+| E) Create eval datasets with golden labels for 1 use case     |
++---------------------------------------------------------------+
+Dimension Drill-down Card
++--------------------- Data Quality ----------------------------+
+| Score: 2.9   Coverage: 78 percent schemas sampled            |
+| Subscores: Completeness 65, Freshness 58, Uniqueness 72, ...  |
+| Evidence: 24 queries, 3 API calls, last run 2025-11-11        |
+| Why it matters:                                               |
+|  High null rates in keys will break feature stores and evals. |
+| How to fix:                                                   |
+|  Add dbt tests to 12 models. Enforce SLA in Fivetran jobs.    |
++----------------------------------------------------------------
+Recommendations Matrix
+Impact ↑
+ |        [A] Ownership policy
+ |        [B] dbt uniqueness tests
+ |  [C] Right-size compute
+ |                   [D] Prompt logging
+ |                               [E] Eval datasets
+ +--------------------------------------------------> Effort →
+```
+
+---
+
+## 8. Technical Design Notes
+
+### 8.1 Implementation Stack
+- **Backend:** Python or TypeScript services, FastAPI or Express, gRPC between services.
+- **Data Store:** Postgres for metadata and results, object storage for artifacts, Parquet for large evidence sets.
+- **Compute:** Containerized jobs on Kubernetes. Batch workers for profilers.
+- **UI:** React with server or client side rendering, d3 for charts, Tailwind for layout.
+- **Security:** Vault for secrets, cloud KMS, SSO via OIDC.
+- **Orchestration:** Temporal or Argo Workflows for runs and retries.
+
+### 8.2 Extensibility
+- Connector SDK with clear interfaces.
+- Metric DSL for adding new tests without code changes.
+- Weighting profiles per industry compliance needs.
+
+### 8.3 Cost and Performance Controls
+- Sampling caps and query timeouts.
+- Staggered scans outside business hours.
+- Evidence retention policy with redaction.
+
+### 8.4 Offline and Air-gapped Mode
+- Ship a container bundle.
+- Export reports to a secure file share.
+- No outbound calls.
+
+---
+
+## 9. Risk Register and Mitigations
+- **Data sensitivity:** Strict read-only access and masking by default.
+- **API rate limits:** Queue and backoff, respect SaaS quotas.
+- **Vendor differences:** Feature flags per platform to handle capability gaps.
+- **False positives in PII:** Use ensemble of regex and ML, require human confirmation for high impact actions.
+
+---
+
+## 10. GTM, Packaging, and Pricing Hints
+- **Entry package:** Fixed fee assessment for up to X assets and Y connectors including an executive report and two workshops.
+- **Plus package:** Adds continuous mode for 90 days and guided remediation sprints.
+- **Outcome:** Two AI pilot candidates with clean datasets and guardrails.
+
+---
+
+## 11. Roadmap and Timeline
+
+### Phase 0 (0 to 2 weeks)
+- Requirements finalization, connector stubs, metric DSL skeleton, initial UI frames.
+
+### Phase 1 (2 to 6 weeks)
+- Snowflake, dbt, Salesforce connectors. Core DQ metrics. Scoring engine v1. Results overview UI. PDF export v1.
+
+### Phase 2 (6 to 10 weeks)
+- Databricks, BigQuery, Fivetran, Matillion. Lineage coverage. Governance and security checks. Role-based summaries.
+
+### Phase 3 (10 to 14 weeks)
+- Recommendations engine with vendor awareness. Jira export, Azure Boards export. Effort vs impact matrix. FinOps metrics.
+
+### Phase 4 (14 to 18 weeks)
+- Private VPC deployment templates. Air-gapped build. Continuous mode preview.
+
+### Milestone Gates
+- **M1:** First complete end-to-end run on a pilot dataset.
+- **M2:** Executive deck sign-off with one design partner.
+- **M3:** Two quick-win pilots launched.
+
+---
+
+## 12. Sample Backlog
+- Connector SDK and auth abstractions.
+- Snowflake metadata harvester and sampling profiler.
+- dbt manifest parser and test summarizer.
+- Scoring engine with weight profiles and threshold mapping.
+- PDF generator with templating and brand assets.
+- Recommendations engine rules: Azure tenant, GCP tenant, OpenAI contract present, air-gapped.
+- Role dashboards with drill-downs and evidence viewer.
+
+---
+
+## 13. What to Add Next
+- **Data Contracts:** Optional detection of brittle interfaces and contract violations.
+- **Feature Store Readiness:** Checks for versioning and documentation quality.
+- **AI Risk:** Red teaming posture, evaluation harness readiness, hallucination guardrails.
+- **Benchmark Library:** Side-by-side industry maturity baselines by sector.
+- **Partner Motion:** Prebuilt offers with Snowflake, Databricks, and GCP to leverage credits.
+- **Managed Option:** 90 day continuous mode with weekly guidance and a standing triage call.
+
+---
+
+## 14. Appendices
+
+### 14.1 Sample SQL and Rules
+- Completeness example: `SELECT COUNT(*) FROM table WHERE key IS NULL` to surface nulls.
+- Freshness example: `SELECT MAX(ingest_timestamp) FROM table` compared to SLA hours.
+- Uniqueness example: `SELECT COUNT(DISTINCT business_key) / COUNT(*)` on critical keys.
+- Ownership coverage: Tables without entries in owner mapping tables.
+
+### 14.2 Example Jira Epics
+- Establish ownership policies.
+- Implement dbt test coverage to 90 percent on critical models.
+- FinOps right-sizing and idle compute reduction.
+
+### 14.3 Example Executive Slide Outline
+1. Current readiness gauge and dimension scores.
+2. Why you score here.
+3. Top five risks and quick wins.
+4. 30-60-90 day plan.
+5. Investment options by vendor and licensing posture.
+
+---
+
+## 15. Naming Options
+- ReadyAI Data Assessment
+- Aegis Data Readiness
+- Prism AI Readiness by Decision Minds
+- DM Aurora Readiness
+
+---
+
+## 16. Ownership and RACI (MVP)
+- **Product:** Decision Minds Product Lead.
+- **Engineering:** Connector Lead, Scoring Lead, UI Lead.
+- **Design:** UX Lead.
+- **Data Science:** PII and policy heuristics.
+- **Alliances:** Cloud partner motions and credits.
+- **Delivery:** Pilot customer engagement and report readouts.
+
+---
+
+## 17. Acceptance Test Scenarios
+- Run against a demo Snowflake with 50 schemas, produce scores within 2 hours.
+- Inject nulls and confirm completeness score drops with clear evidence.
+- Remove owners and confirm governance score reflects the gap.
+- Change SLA and confirm freshness logic updates scores.
+
+---
+
+## 18. Communication Templates
+- Kickoff email to customer explaining data access, timeline, and deliverables.
+- Executive summary template with role-specific highlights.
+- Remediation backlog handover checklist.
+
+---
 
 ## Streamlit Demo
-A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, Looker, Power BI, Tableau, and other supported data connection platforms. Additional tabs visualize feature coverage, detailed check telemetry, and the ten-step delivery plan so stakeholders can validate progress in real time. Launch it locally with:
-A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, Looker, Power BI, Tableau, and other supported data connection platforms. Launch it locally with:
+A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, BigQuery, Looker, Power BI, Tableau, and other supported data connection platforms. Additional tabs visualize feature coverage, detailed check telemetry, persona-specific narratives, and an embedded accelerator specification that mirrors the MVP blueprint so stakeholders can validate progress in real time.
+
+Launch it locally with:
 
 ```bash
 streamlit run docs/data_ai_readiness_streamlit_demo.py
