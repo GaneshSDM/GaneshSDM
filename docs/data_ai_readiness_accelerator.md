@@ -65,3 +65,10 @@ The Data & AI Readiness Accelerator helps organizations determine whether their 
 3. Provision environments for profiling, quality scoring, and dashboard analysis.
 4. Launch the assessment sprint and socialize preliminary findings.
 5. Iterate on remediation plan with cross-functional stakeholders.
+
+## Streamlit Demo
+A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, Looker, Power BI, Tableau, and other supported data connection platforms. Launch it locally with:
+
+```bash
+streamlit run docs/data_ai_readiness_streamlit_demo.py
+```
