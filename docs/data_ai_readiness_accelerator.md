@@ -148,6 +148,7 @@ The Data & AI Readiness Accelerator helps organizations determine whether their 
 
 ## Streamlit Demo
 A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, Looker, Power BI, Tableau, and other supported data connection platforms. Additional tabs visualize feature coverage, detailed check telemetry, and the ten-step delivery plan so stakeholders can validate progress in real time. Launch it locally with:
+A reference Streamlit application is available at `docs/data_ai_readiness_streamlit_demo.py`. The demo highlights readiness scores, remediation themes, and cross-platform benchmarking for Snowflake, Databricks, Looker, Power BI, Tableau, and other supported data connection platforms. Launch it locally with:
 
 ```bash
 streamlit run docs/data_ai_readiness_streamlit_demo.py
