@@ -400,3 +400,5 @@ Launch it locally with:
 ```bash
 streamlit run docs/data_ai_readiness_streamlit_demo.py
 ```
+
+End of v1.0

@@ -860,6 +860,8 @@ COMMUNICATION_TEMPLATES = [
     "Remediation backlog handover checklist",
 ]
 
+SPEC_FOOTER = "End of v1.0"
+
 
 def configure_page() -> None:
     """Configure Streamlit page defaults."""
@@ -1202,6 +1204,7 @@ def render_accelerator_spec() -> None:
     st.subheader("Communication Templates")
     for item in COMMUNICATION_TEMPLATES:
         st.write(f"- {item}")
+    st.caption(SPEC_FOOTER)
 
 
 def render_persona_view(selected: PlatformReadiness, persona: str) -> None:
