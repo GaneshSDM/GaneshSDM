@@ -86,7 +86,6 @@ Pulled directly from the projects above and recent delivery focus.
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=GaneshSDM&show_icons=true&theme=tokyonight&hide_border=true" alt="GitHub stats" />
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=GaneshSDM&theme=tokyonight&hide_border=true" alt="Streak stats" />
 
 </div>
