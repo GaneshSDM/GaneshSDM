@@ -15,13 +15,13 @@
 
 ## 👋 About
 
-Engineering leader focused on shipping AI-driven products end-to-end — from data foundations and LLM orchestration to the production apps that surface them. I lead offshore development teams through fast, outcome-driven delivery cycles and enjoy picking up new toolchains hands-on (LangGraph, Claude Code, vector databases, multi-agent patterns) when a problem demands it.
+Engineering novice focused on shipping AI-driven products end-to-end — from data foundations and LLM orchestration to the production apps that surface them. I lead offshore development teams through fast, outcome-driven delivery cycles and enjoy picking up new toolchains hands-on (LangGraph, Claude Code, vector databases, multi-agent patterns) when a problem demands it.
 
 > Replace this paragraph with your own headline bio — a couple of sentences on what you do and what you're known for.
 
-- 🌍 Based in: _[add city / region]_
-- 🏢 Current focus: _[add role / team / org]_
-- 📫 Reach me: _[add preferred contact channel]_
+- 🌍 Based in: _Chennai
+- 🏢 Current focus: Senior Data Engineer / Analytics
+- 📫 Reach me: https://www.linkedin.com/in/nashsundaresan/
 
 ---
 
