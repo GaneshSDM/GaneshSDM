@@ -17,7 +17,7 @@
 
 Engineering novice focused on shipping AI-driven products end-to-end — from data foundations and LLM orchestration to the production apps that surface them. I lead offshore development teams through fast, outcome-driven delivery cycles and enjoy picking up new toolchains hands-on (LangGraph, Claude Code, vector databases, multi-agent patterns) when a problem demands it.
 
-- 🌍 Based in: _Chennai
+- 🌍 Based in: Chennai
 - 🏢 Current focus: Senior Data Engineer / Analytics
 - 📫 Reach me: https://www.linkedin.com/in/nashsundaresan/
 
@@ -68,7 +68,7 @@ Pulled directly from the projects above and recent delivery focus.
 ## 📈 Recent Highlights
 
 - **Pondicherry MVP delivery** — Led an offshore engineering team (alongside Jiju, Shashank, Varun, Venkatesh) through a 3-week intensive build that produced a working MVP against the outcome targets set. Learned and shipped with SLMs, LangGraph orchestration, Claude Code, embedding models, vector databases, and multi-agent management in the process.
-- **Corporate AI Capability Deck** — Co-authoring (with @Ganesh Sundaresan's team) the sections on structure, differentiators, reference architectures, accelerators, deployment models, and AI readiness framework.
+- **Corporate AI Capability Deck** — Co-authoring the sections on structure, differentiators, reference architectures, accelerators, deployment models, and AI readiness framework.
 - **Offshore delivery recognition** — Recognized for leading key offshore development workstreams and driving implementation across multiple parallel efforts.
 
 ---
@@ -78,7 +78,7 @@ Pulled directly from the projects above and recent delivery focus.
 - Outcome-driven: I like MVPs in days, not quarters.
 - Pick up new stacks hands-on when a problem calls for it.
 - Strong on accelerators and patterns that pay back across teams.
-- Comfortable bridging Databricks, AI, and full-stack product work.
+- Comfortable bridging Snowflake , Databricks, AI, and full-stack product work.
 
 ---
 
